@@ -4,7 +4,7 @@
 # you can add your own stuff into this script!
 # please consider making it clear to the user what is being done
 
-from pkg_resources import packaging # for pip version check
+from packaging.version import Version
 from subprocess import check_output
 import os
 import sys
@@ -21,7 +21,7 @@ cmdline = ["python3", "-m", "pip", "install"]
 output = check_output(["pip", "--version"])
 if isinstance(output, bytes): output = output.decode("utf-8")
 _, ver, _ = output.split(' ', 2)
-if packaging.version.parse(ver) > packaging.version.parse("23.0.0"):
+if Version(ver) > Version("23.0.0"):
     cmdline.append("--break-system-packages")
 
 cmdline.append("--editable")
